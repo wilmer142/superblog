@@ -31,6 +31,13 @@ class PostsController < ApplicationController
   end
 
   def update
+    if @post.update(post_params)
+      flash[:success] = "Post modificado exitosamente!"
+      redirect_to posts_path
+    else
+      flash[:danger] = "No se pudo modificar el post"
+      render :edit
+    end
   end
 
   def destroy
