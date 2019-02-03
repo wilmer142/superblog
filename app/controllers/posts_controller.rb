@@ -8,12 +8,23 @@ class PostsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    @post = Post.new(post_params)
+    @post[:user_id] = current_user[:id]
+    if @post.save
+      flash[:success] = "Post creado exitosamente!"
+      redirect_to posts_path    
+    else
+      flash[:danger] = @post.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def edit
