@@ -33,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#User annotate to map schema
+gem 'annotate'
+#Use pry for debug
+gem 'pry'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
