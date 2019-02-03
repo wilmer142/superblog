@@ -41,6 +41,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    if @post.destroy
+      flash[:success] = "Post eliminado exitosamente!"
+      redirect_to posts_path
+    else
+      flash[:danger] = "No se pudo eliminar el post"
+      render :index
+    end
   end
 
   private
