@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       flash[:success] = "Post creado exitosamente!"
       redirect_to posts_path    
     else
-      flash[:danger] = @post.errors.full_messages.to_sentence
+      flash[:danger] = @post.errors.full_messages
       render :new
     end
   end
