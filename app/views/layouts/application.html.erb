@@ -10,31 +10,33 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-fixed-top">
-      <div class="container">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Superblog</a>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <% if user_signed_in? %>
-                <li><%= link_to 'Nuevo Post' %></li>
-                <li><%= link_to 'Salir', destroy_user_session_path, method: :delete %></li>
-              <% else %>
-                <li><%= link_to 'Ingresar', new_user_session_path %></li>
-                <li><%= link_to 'Registrarse', new_user_registration_path %></li>
-              <% end %>
-            </ul> 
-          </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Superblog</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= link_to 'Nuevo Post', new_post_path%></li>
+              <li><%= link_to 'Salir', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Ingresar', new_user_session_path %></li>
+              <li><%= link_to 'Registrarse', new_user_registration_path %></li>
+            <% end %>
+          </ul> 
         </div>
       </div>
     </nav>
 
     <div class="container">
-      <% flash.each do |name, msg| %>
-        <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-      <% end %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:ul, class: "alert alert-#{key}") do %>
+          <% value.each do |error| %>
+            <%= content_tag(:li, error) %>
+          <% end.join.html_safe %>
+        <% end %>
+      <% end %>  
     </div>
 
     <div class="container">
